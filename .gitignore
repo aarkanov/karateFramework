@@ -1,0 +1,31 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+gradlew
+gradlew.bat
+
+# Ignore Gradle build output directory
+target
+build
+bin
+gradle
+
+# VSCode specific files/directories
+.settings
+.vscode
+
+# IntelliJ specific files/directories
+out
+.idea
+*.ipr
+*.iws
+*.iml
+atlassian-ide-plugin.xml
+
+# Eclipse specific files/directories
+.classpath
+.project
+.settings
+.metadata
+
+# Karate Reports
+src/test/reports
