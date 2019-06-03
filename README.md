@@ -33,7 +33,7 @@ Karate is a BDD-based API Testing framework that allows for the testing of SOAP 
 ```Java
 plugins {
     // Apply the java-library plugin to add support for Java Library
-    id 'java-library'
+    id "java-library"
 }
 
 sourceCompatibility = 1.8
@@ -50,15 +50,15 @@ repositories {
 sourceSets {
     test {
         java {
-            srcDir file('src/test/java')
-            exclude '**/*UiRunner*.java'
+            srcDir file("src/test/java")
+            exclude "**/*UiRunner*.java"
         }
         resources {
             // Using recommended karate project layout where karate feature files
             // and associated javascript resources sit in same /test/java folders
             // as their java counterparts.
-            srcDir file('src/test/java')
-            exclude '**/*.java'
+            srcDir file("src/test/java")
+            exclude "**/*.java"
         }
     }
 }
@@ -71,13 +71,13 @@ test {
 }
 
 dependencies {
-    compile files('src/main/resources/slalom-karate-framework-1.0.0.jar')
+    compile files("src/main/resources/slalom-karate-framework-1.0.0.jar")
 
     // This dependency is exported to consumers, that is to say found on their compile classpath.
-    api 'org.apache.commons:commons-math3:3.6.1'
+    api "org.apache.commons:commons-math3:3.6.1"
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    implementation 'com.google.guava:guava:27.0.1-jre'
+    implementation "com.google.guava:guava:27.0.1-jre"
 }
 ```
 7. Create a karate-config.js file in the src/test/java folder
@@ -88,14 +88,14 @@ dependencies {
 ## Running Tests
 * If you have not yet done so, read [Recommended File Structure](https://github.com/intuit/karate#naming-conventions)
     * There needs to be one top level java file that will serve as the overall test runner for the project. The syntax of that class can be seen below.
-```java
-public class RunnerTest {
-    @Test
-    public void test() {
-        ReportUtility.generateReport(ReportUtility.testParallel());
-    }
-}
-```
+        ```java
+        public class RunnerTest {
+            @Test
+            public void test() {
+                ReportUtility.generateReport(ReportUtility.testParallel());
+            }
+        }
+        ```
         * The test parallel method takes 2 optional parameters as seen in [Framework Utility Classes](#Framework-Utility-Classes)
     * Once that class exists, test can be run using ```gradle test```
         * Subsets can be run using tags as such ```gradle test -Dkarate.options="--tags @include"```
@@ -114,11 +114,11 @@ public class RunnerTest {
 * All Utility classes can be imported and used as below
     ```java
     Scenario: Auth
-    * def authUtility = Java.type('slalom.karate.framework.AuthUtility')
-    * def commandLineUtility = Java.type('slalom.karate.framework.CommandLineUtility')
-    * header Authorization = authUtility.basicAuthEncoding('username', 'password')
-    * print commandLineUtility.getArg('rally')
-    Given url 'http://blazedemo.com'
+    * def authUtility = Java.type("slalom.karate.framework.AuthUtility")
+    * def commandLineUtility = Java.type("slalom.karate.framework.CommandLineUtility")
+    * header Authorization = authUtility.basicAuthEncoding("username", "password")
+    * print commandLineUtility.getArg("rally")
+    Given url "http://blazedemo.com"
     When method get
     Then status 200
     ```
@@ -157,7 +157,7 @@ public class RunnerTest {
 
 ### Reusable Features
 * The ```call``` keyword can be used in conjunction with the ```read``` keyword to call another feature file and pass parameters to it
-    * Example:  ```* call read('classpath:update-results.feature') { user: 'slalom' }```
+    * Example:  ```* call read("classpath:update-results.feature") { user: "slalom" }```
 * [Code Reuse](https://github.com/intuit/karate#code-reuse--common-routines)
 
 ### Hooks
