@@ -87,20 +87,20 @@ dependencies {
 
 ## Running Tests
 * If you have not yet done so, read [Recommended File Structure](https://github.com/intuit/karate#naming-conventions)
-    * There needs to be one top level java file that will serve as the overall test runner for the project. The syntax of that class can be seen below.
-        ```java
-        public class RunnerTest {
-            @Test
-            public void test() {
-                ReportUtility.generateReport(ReportUtility.testParallel());
-            }
-        }
-        ```
-        * The test parallel method takes 2 optional parameters as seen in [Framework Utility Classes](#Framework-Utility-Classes)
-    * Once that class exists, test can be run using ```gradle test```
-        * Subsets can be run using tags as such ```gradle test -Dkarate.options="--tags @include"```
-    * If you want to run test subsets using the JUnit runner in your IDE or have differing Java run configuration for test subsets, Java runner files can be created at the child level
-        * Refer back to [Recommended File Structure](https://github.com/intuit/karate#naming-conventions) for more information on this approach
+* There needs to be one top level java file that will serve as the overall test runner for the project. The syntax of that class can be seen below.
+    * The test parallel method takes 2 optional parameters as seen in [Framework Utility Classes](#Framework-Utility-Classes)
+```java
+public class RunnerTest {
+    @Test
+    public void test() {
+        ReportUtility.generateReport(ReportUtility.testParallel());
+    }
+}
+```
+* Once that class exists, test can be run using ```gradle test```
+    * Subsets can be run using tags as such ```gradle test -Dkarate.options="--tags @include"```
+* If you want to run test subsets using the JUnit runner in your IDE or have differing Java run configuration for test subsets, Java runner files can be created at the child level
+    * Refer back to [Recommended File Structure](https://github.com/intuit/karate#naming-conventions) for more information on this approach
 * It is recommended to delete src/test/reports/karate-output between runs to clean up any cached report data
 
 ## Reports
