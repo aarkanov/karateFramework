@@ -30,7 +30,7 @@ Karate is a BDD-based API Testing framework that allows for the testing of SOAP 
 4. Run ```gradle init --type java-library :wrapper :init``` to generate a gradle project
 5. Place the ```slalom-karate-framework-1.0.0.jar``` file into the src/main/resources directory
 6. Update the build.gradle file to match the following structure
-    ```
+    ```groovy
     plugins {
         // Apply the java-library plugin to add support for Java Library
         id 'java-library'
