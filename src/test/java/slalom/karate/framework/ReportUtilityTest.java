@@ -35,9 +35,7 @@ public class ReportUtilityTest {
 
     @Test
     public void testParallelDefault() {
-        ReportUtility reportUtility = new ReportUtility();
-
-        Results results = reportUtility.testParallel();
+        Results results = ReportUtility.testParallel();
 
         assertEquals(1, results.getThreadCount());
         assertEquals("src/test/reports/karate-output", results.getReportDir());
@@ -46,9 +44,8 @@ public class ReportUtilityTest {
     @Test
     public void testParallelWithParameter() {
         int threadCount = 10;
-        ReportUtility reportUtility = new ReportUtility();
 
-        Results results = reportUtility.testParallel(threadCount);
+        Results results = ReportUtility.testParallel(threadCount);
 
         assertEquals(threadCount, results.getThreadCount());
         assertEquals("src/test/reports/karate-output", results.getReportDir());
@@ -63,9 +60,8 @@ public class ReportUtilityTest {
         List<String> expectedFiles = new ArrayList<String>(2);
         expectedFiles.add(firstFile.getAbsolutePath());
         expectedFiles.add(secondFile.getAbsolutePath());
-        ReportUtility reportUtility = new ReportUtility();
 
-        List<String> actualFiles = reportUtility.getJsonFiles(results);
+        List<String> actualFiles = ReportUtility.getJsonFiles(results);
 
         assertThat(actualFiles, CoreMatchers.is(expectedFiles));
     }
@@ -75,9 +71,8 @@ public class ReportUtilityTest {
         File secondFolder = folder.newFolder("karate-output");
         Results results = Results.startTimer(1);
         results.setReportDir(secondFolder.getAbsolutePath());
-        ReportUtility reportUtility = new ReportUtility();
     
-        reportUtility.generateReport(results);
+        ReportUtility.generateReport(results);
 
         String[] directories = folder.getRoot().list(new FilenameFilter() {
             @Override
@@ -99,12 +94,11 @@ public class ReportUtilityTest {
 
     @Test
     public void testConfigCreation() {
-        ReportUtility reportUtility = new ReportUtility();
         File reportDirectory = new File("src/report");
         String projectName = "project";
         Configuration expectedConfiguration = new Configuration(reportDirectory, projectName);
 
-        Configuration actualConfiguration = reportUtility.createConfiguration(reportDirectory, projectName);
+        Configuration actualConfiguration = ReportUtility.createConfiguration(reportDirectory, projectName);
 
         assertEquals(expectedConfiguration.getReportDirectory(), actualConfiguration.getReportDirectory());
         assertEquals(expectedConfiguration.getProjectName(), actualConfiguration.getProjectName());
