@@ -30,56 +30,56 @@ Karate is a BDD-based API Testing framework that allows for the testing of SOAP 
 4. Run ```gradle init --type java-library :wrapper :init``` to generate a gradle project
 5. Place the ```slalom-karate-framework-1.0.0.jar``` file into the src/main/resources directory
 6. Update the build.gradle file to match the following structure
-    ```java
-    plugins {
-        // Apply the java-library plugin to add support for Java Library
-        id 'java-library'
-    }
+```Java
+plugins {
+    // Apply the java-library plugin to add support for Java Library
+    id 'java-library'
+}
 
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        maven { url "http://repo.spring.io/release" }
-        maven { url "http://repo.spring.io/milestone" }
-        maven { url "http://repo.spring.io/snapshot" }
-    }
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "http://repo.spring.io/release" }
+    maven { url "http://repo.spring.io/milestone" }
+    maven { url "http://repo.spring.io/snapshot" }
+}
 
-    sourceSets {
-        test {
-            java {
-                srcDir file('src/test/java')
-                exclude '**/*UiRunner*.java'
-            }
-            resources {
-                // Using recommended karate project layout where karate feature files
-                // and associated javascript resources sit in same /test/java folders
-                // as their java counterparts.
-                srcDir file('src/test/java')
-                exclude '**/*.java'
-            }
+sourceSets {
+    test {
+        java {
+            srcDir file('src/test/java')
+            exclude '**/*UiRunner*.java'
+        }
+        resources {
+            // Using recommended karate project layout where karate feature files
+            // and associated javascript resources sit in same /test/java folders
+            // as their java counterparts.
+            srcDir file('src/test/java')
+            exclude '**/*.java'
         }
     }
+}
 
-    test {
-        // Enables pulling in command line arguments at runtime
-        systemProperties = System.properties
-        // Ensure tests are always run
-        outputs.upToDateWhen { false }
-    }
+test {
+    // Enables pulling in command line arguments at runtime
+    systemProperties = System.properties
+    // Ensure tests are always run
+    outputs.upToDateWhen { false }
+}
 
-    dependencies {
-        compile files('src/main/resources/slalom-karate-framework-1.0.0.jar')
+dependencies {
+    compile files('src/main/resources/slalom-karate-framework-1.0.0.jar')
 
-        // This dependency is exported to consumers, that is to say found on their compile classpath.
-        api 'org.apache.commons:commons-math3:3.6.1'
+    // This dependency is exported to consumers, that is to say found on their compile classpath.
+    api 'org.apache.commons:commons-math3:3.6.1'
 
-        // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-        implementation 'com.google.guava:guava:27.0.1-jre'
-    }
-    ```
+    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
+    implementation 'com.google.guava:guava:27.0.1-jre'
+}
+```
 7. Create a karate-config.js file in the src/test/java folder
     * [Karate Config](https://github.com/intuit/karate#karate-configjs)
 8. Read [Recommended File Structure](https://github.com/intuit/karate#naming-conventions)
@@ -88,14 +88,14 @@ Karate is a BDD-based API Testing framework that allows for the testing of SOAP 
 ## Running Tests
 * If you have not yet done so, read [Recommended File Structure](https://github.com/intuit/karate#naming-conventions)
     * There needs to be one top level java file that will serve as the overall test runner for the project. The syntax of that class can be seen below.
-        * ```java
-            public class RunnerTest {
-                @Test
-                public void test() {
-                    ReportUtility.generateReport(ReportUtility.testParallel());
-                }
-            }
-          ```
+```java
+public class RunnerTest {
+    @Test
+    public void test() {
+        ReportUtility.generateReport(ReportUtility.testParallel());
+    }
+}
+```
         * The test parallel method takes 2 optional parameters as seen in [Framework Utility Classes](#Framework-Utility-Classes)
     * Once that class exists, test can be run using ```gradle test```
         * Subsets can be run using tags as such ```gradle test -Dkarate.options="--tags @include"```
