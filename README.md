@@ -114,8 +114,8 @@ public class RunnerTest {
 * All Utility classes can be imported and used as below
 ```java
 Scenario: Auth
-* def authUtility = Java.type("slalom.karate.framework.AuthUtility")
-* def commandLineUtility = Java.type("slalom.karate.framework.CommandLineUtility")
+* def authUtility = Java.type("karate.rest.soap.testing.AuthUtility")
+* def commandLineUtility = Java.type("karate.rest.soap.testing.CommandLineUtility")
 * header Authorization = authUtility.basicAuthEncoding("username", "password")
 * print commandLineUtility.getArg("rally")
 Given url "http://blazedemo.com"

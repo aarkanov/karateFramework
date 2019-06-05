@@ -1,10 +1,10 @@
-package slalom.karate.framework;
+package karate.rest.soap.testing;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import java.util.UUID;
 import org.junit.Test;
-import slalom.karate.framework.RandomGeneratorUtility;
+import karate.rest.soap.testing.RandomGeneratorUtility;
 
 public class RandomGeneratorUtilityTest {
     @Test

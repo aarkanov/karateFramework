@@ -1,4 +1,4 @@
-package slalom.karate.framework;
+package karate.rest.soap.testing;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -19,8 +19,8 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import net.masterthought.cucumber.Configuration;
-import slalom.karate.framework.DateTimeUtility;
-import slalom.karate.framework.ReportUtility;
+import karate.rest.soap.testing.DateTimeUtility;
+import karate.rest.soap.testing.ReportUtility;
 
 public class ReportUtilityTest {
     @Rule

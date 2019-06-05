@@ -1,4 +1,4 @@
-package slalom.karate.framework;
+package karate.rest.soap.testing;
 
 import com.intuit.karate.Results;
 import com.intuit.karate.Runner;
@@ -11,7 +11,7 @@ import net.masterthought.cucumber.Configuration;
 import net.masterthought.cucumber.ReportBuilder;
 
 import org.apache.commons.io.FileUtils;
-import slalom.karate.framework.DateTimeUtility;;
+import karate.rest.soap.testing.DateTimeUtility;;
 
 public class ReportUtility {
     public static Results testParallel() {

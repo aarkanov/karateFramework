@@ -1,8 +1,8 @@
-package slalom.karate.framework;
+package karate.rest.soap.testing;
 
 import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
-import slalom.karate.framework.App;
+import karate.rest.soap.testing.App;
 
 public class AppTest {
     @Test public void testSomeLibraryMethod() {

@@ -1,8 +1,8 @@
-package slalom.karate.framework;
+package karate.rest.soap.testing;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import slalom.karate.framework.AuthUtility;;
+import karate.rest.soap.testing.AuthUtility;;
 
 public class AuthUtilityTest {
     @Test

@@ -1,8 +1,8 @@
-package slalom.karate.framework;
+package karate.rest.soap.testing;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import slalom.karate.framework.CommandLineUtility;;;
+import karate.rest.soap.testing.CommandLineUtility;;;
 
 public class CommandLineUtilityTest {
     @Test

@@ -1,10 +1,10 @@
-package slalom.karate.framework;
+package karate.rest.soap.testing;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import slalom.karate.framework.DateTimeUtility;
+import karate.rest.soap.testing.DateTimeUtility;
 
 public class DateTimeUtilityTest {
     @Test

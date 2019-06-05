@@ -1,4 +1,4 @@
-package slalom.karate.framework;
+package karate.rest.soap.testing;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
