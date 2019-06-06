@@ -133,11 +133,11 @@ Then status 200
 
 ### Database Utility
 * DatabaseUtility(Map<String, Object> config): initializes the database utility class with username, password, url and driverClassName
-    ```java
-    * def config = { username: 'qa', password: 'password', url: 'jdbc:h2:mem:testdb', driverClassName: 'org.h2.Driver' }
-    * def databaseUtility = Java.type('karate.rest.soap.testing.DatabaseUtility')
-    * def db = new DatabaseUtility(config)
-    ```
+```java
+* def config = { username: 'qa', password: 'password', url: 'jdbc:h2:mem:testdb', driverClassName: 'org.h2.Driver' }
+* def databaseUtility = Java.type('karate.rest.soap.testing.DatabaseUtility')
+* def db = new DatabaseUtility(config)
+```
 * readValue(String query): returns a single object from a database i.e. get ID of certain row
 * readRow(String query): returns a row from a database
 * readRows(String query): returns multiple rows from database
