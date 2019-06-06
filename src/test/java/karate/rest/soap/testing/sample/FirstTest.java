@@ -1,4 +1,4 @@
-package karate.rest.soap.testing.samples;
+package karate.rest.soap.testing.sample;
 
 import org.junit.Test;
 import karate.rest.soap.testing.ReportUtility;
