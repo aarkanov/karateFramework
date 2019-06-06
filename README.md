@@ -30,7 +30,7 @@ Karate is a BDD-based API Testing framework that allows for the testing of SOAP 
 2. Download the framework locally to extract the framework .jar file from the framework-jar folder
 3. Go into folder where code will live
 4. Run ```gradle init --type java-library :wrapper :init``` to generate a gradle project
-5. Place the ```slalom-karate-framework-1.0.0.jar``` file into the src/main/resources directory
+5. Place the ```karate-rest-soap-testing-1.1.0.jar``` file into the src/main/resources directory
 6. Update the build.gradle file to match the following structure
 ```Java
 plugins {
@@ -73,7 +73,7 @@ test {
 }
 
 dependencies {
-    compile files("src/main/resources/slalom-karate-framework-1.0.0.jar")
+    compile files("src/main/resources/karate-rest-soap-testing-1.1.0.jar")
 
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     api "org.apache.commons:commons-math3:3.6.1"
