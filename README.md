@@ -9,6 +9,7 @@ Karate is a BDD-based API Testing framework that allows for the testing of SOAP 
 * [Framework Utility Classes](#markdown-header-framework-utility-classes)
     * [Auth Utility](#markdown-header-auth-utility)
     * [Command Line Utility](#markdown-header-command-line-utility)
+    * [Database Utility](#markdown-header-database-utility)
     * [Date Time Utility](#markdown-header-date-time-utility)
     * [Random Generator Utility](#markdown-header-random-generator-utility)
     * [Report Utility](#markdown-header-report-utility)
@@ -16,6 +17,7 @@ Karate is a BDD-based API Testing framework that allows for the testing of SOAP 
     * [Syntax](#markdown-header-syntax)
     * [Reading Files](#markdown-header-reading-files)
     * [Reusable Features](#markdown-header-reusable-features)
+    * [Database Testing](#markdown-header-database-testing)
     * [Hooks](#markdown-header-hooks)
     * [Request](#markdown-header-request)
     * [Response](#markdown-header-response)
@@ -129,6 +131,12 @@ Then status 200
 ### Command Line Utility
 * getArg(): allows any argument passed  via the command line with -D at run time to be retrieved and used in a script
 
+### Database Utility
+* readValue(String query): returns a single object from a database i.e. get ID of certain row
+* readRow(String query): returns a row from a database
+* readRows(String query): returns multiple rows from database
+* executeChangeStatement(String query): executes database updates such as INSERT, UPDATE, DELETE
+
 ### Date Time Utility
 * getFormattedDate(): returns date in yyyy-MM-dd format
 * getFormattedTime(): returns time in HH:mm:ss format
@@ -163,6 +171,11 @@ Then status 200
 * The ```call``` keyword can be used in conjunction with the ```read``` keyword to call another feature file and pass parameters to it
     * Example:  ```* call read("classpath:update-results.feature") { user: "slalom" }```
 * [Code Reuse](https://github.com/intuit/karate#code-reuse--common-routines)
+
+### Database Testing
+* Database queries can be executed using the [Database Utility](##markdown-header-database-utility)
+* The results of SELECT queries are turned into a JSON mapping that can be asserted on using Karate's [Match](#markdown-header-assertion-types) Keyword
+    * Examples: [Database Assertions](#https://github.com/intuit/karate/blob/master/karate-demo/src/test/java/demo/dogs/dogs.feature)
 
 ### Hooks
 * Karate is not based on Cucumber but does allow support for various hooks leveraging the karate-config, background and after keywords
