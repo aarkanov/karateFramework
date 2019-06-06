@@ -9,6 +9,7 @@ Karate is a BDD-based API Testing framework that allows for the testing of SOAP 
 * [Framework Utility Classes](#markdown-header-framework-utility-classes)
     * [Auth Utility](#markdown-header-auth-utility)
     * [Command Line Utility](#markdown-header-command-line-utility)
+    * [Database Utility](#markdown-header-database-utility)
     * [Date Time Utility](#markdown-header-date-time-utility)
     * [Random Generator Utility](#markdown-header-random-generator-utility)
     * [Report Utility](#markdown-header-report-utility)
@@ -16,6 +17,7 @@ Karate is a BDD-based API Testing framework that allows for the testing of SOAP 
     * [Syntax](#markdown-header-syntax)
     * [Reading Files](#markdown-header-reading-files)
     * [Reusable Features](#markdown-header-reusable-features)
+    * [Database Testing](#markdown-header-database-testing)
     * [Hooks](#markdown-header-hooks)
     * [Request](#markdown-header-request)
     * [Response](#markdown-header-response)
@@ -28,7 +30,7 @@ Karate is a BDD-based API Testing framework that allows for the testing of SOAP 
 2. Download the framework locally to extract the framework .jar file from the framework-jar folder
 3. Go into folder where code will live
 4. Run ```gradle init --type java-library :wrapper :init``` to generate a gradle project
-5. Place the ```slalom-karate-framework-1.0.0.jar``` file into the src/main/resources directory
+5. Place the ```karate-rest-soap-testing-1.1.0.jar``` file into the src/main/resources directory
 6. Update the build.gradle file to match the following structure
 ```Java
 plugins {
@@ -71,7 +73,7 @@ test {
 }
 
 dependencies {
-    compile files("src/main/resources/slalom-karate-framework-1.0.0.jar")
+    compile files("src/main/resources/karate-rest-soap-testing-1.1.0.jar")
 
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     api "org.apache.commons:commons-math3:3.6.1"
@@ -89,7 +91,7 @@ dependencies {
 * If you have not yet done so, read [Recommended File Structure](https://github.com/intuit/karate#naming-conventions)
 * There needs to be one top level java file that will serve as the overall test runner for the project. The syntax of that class can be seen below.
     * The test parallel method takes 2 optional parameters as seen in [Framework Utility Classes](#Framework-Utility-Classes)
-```java
+```Java
 public class RunnerTest {
     @Test
     public void test() {
@@ -114,8 +116,8 @@ public class RunnerTest {
 * All Utility classes can be imported and used as below
 ```java
 Scenario: Auth
-* def authUtility = Java.type("slalom.karate.framework.AuthUtility")
-* def commandLineUtility = Java.type("slalom.karate.framework.CommandLineUtility")
+* def authUtility = Java.type("karate.rest.soap.testing.AuthUtility")
+* def commandLineUtility = Java.type("karate.rest.soap.testing.CommandLineUtility")
 * header Authorization = authUtility.basicAuthEncoding("username", "password")
 * print commandLineUtility.getArg("rally")
 Given url "http://blazedemo.com"
@@ -128,6 +130,18 @@ Then status 200
 
 ### Command Line Utility
 * getArg(): allows any argument passed  via the command line with -D at run time to be retrieved and used in a script
+
+### Database Utility
+* DatabaseUtility(Map<String, Object> config): initializes the database utility class with username, password, url and driverClassName
+```javascript
+* def config = { username: 'qa', password: 'password', url: 'jdbc:h2:mem:testdb', driverClassName: 'org.h2.Driver' }
+* def databaseUtility = Java.type('karate.rest.soap.testing.DatabaseUtility')
+* def db = new DatabaseUtility(config)
+```
+* readValue(String query): returns a single object from a database i.e. get ID of certain row
+* readRow(String query): returns a row from a database
+* readRows(String query): returns multiple rows from database
+* executeChangeStatement(String query): executes database updates such as INSERT, UPDATE, DELETE
 
 ### Date Time Utility
 * getFormattedDate(): returns date in yyyy-MM-dd format
@@ -163,6 +177,11 @@ Then status 200
 * The ```call``` keyword can be used in conjunction with the ```read``` keyword to call another feature file and pass parameters to it
     * Example:  ```* call read("classpath:update-results.feature") { user: "slalom" }```
 * [Code Reuse](https://github.com/intuit/karate#code-reuse--common-routines)
+
+### Database Testing
+* Database queries can be executed using the [Database Utility](##markdown-header-database-utility)
+* The results of SELECT queries are turned into a JSON mapping that can be asserted on using Karate's [Match](#markdown-header-assertion-types) Keyword
+    * Examples: [Database Assertions](#https://github.com/intuit/karate/blob/master/karate-demo/src/test/java/demo/dogs/dogs.feature)
 
 ### Hooks
 * Karate is not based on Cucumber but does allow support for various hooks leveraging the karate-config, background and after keywords

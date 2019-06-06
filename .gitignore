@@ -8,6 +8,7 @@ target
 build
 bin
 gradle
+framework-jar/karate-rest-soap-testing.jar
 
 # VSCode specific files/directories
 .settings
