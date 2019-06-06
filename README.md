@@ -91,7 +91,7 @@ dependencies {
 * If you have not yet done so, read [Recommended File Structure](https://github.com/intuit/karate#naming-conventions)
 * There needs to be one top level java file that will serve as the overall test runner for the project. The syntax of that class can be seen below.
     * The test parallel method takes 2 optional parameters as seen in [Framework Utility Classes](#Framework-Utility-Classes)
-```java
+```Java
 public class RunnerTest {
     @Test
     public void test() {
@@ -132,6 +132,12 @@ Then status 200
 * getArg(): allows any argument passed  via the command line with -D at run time to be retrieved and used in a script
 
 ### Database Utility
+* DatabaseUtility(Map<String, Object> config): initializes the database utility class with username, password, url and driverClassName
+    ```java
+    * def config = { username: 'qa', password: 'password', url: 'jdbc:h2:mem:testdb', driverClassName: 'org.h2.Driver' }
+    * def databaseUtility = Java.type('karate.rest.soap.testing.DatabaseUtility')
+    * def db = new DatabaseUtility(config)
+    ```
 * readValue(String query): returns a single object from a database i.e. get ID of certain row
 * readRow(String query): returns a row from a database
 * readRows(String query): returns multiple rows from database
