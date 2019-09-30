@@ -23,6 +23,10 @@ public class DateTimeUtility {
         return updateFormat("yyyy-MM-dd_HH:mm:ss");
     }
 
+    public static String getReportFormattedDateTime() {
+        return updateFormat("yyyy-MM-dd_HH-mm-ss");
+    }
+
     public static long getCurrentTimeInMilliseconds() {
         return java.lang.System.currentTimeMillis();
     }

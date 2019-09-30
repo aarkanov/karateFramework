@@ -54,6 +54,19 @@ public class DateTimeUtilityTest {
     }
 
     @Test
+    public void testReportFormattedDateTime() {
+        Calendar calendar = new GregorianCalendar();
+   
+        String formattedDateTime = DateTimeUtility.getReportFormattedDateTime();
+
+        assertEquals(
+            calendar.get(Calendar.YEAR) + "-" + formatInt(calendar.get(Calendar.MONTH) + 1) + "-" +
+            formatInt(calendar.get(Calendar.DAY_OF_MONTH)) + "_" + formatInt(calendar.get(Calendar.HOUR_OF_DAY)) + "-" +
+            formatInt(calendar.get(Calendar.MINUTE)) + "-" + formatInt(calendar.get(Calendar.SECOND)), 
+            formattedDateTime);
+    }
+
+    @Test
     public void testCurrentTime() {
         long time = DateTimeUtility.getCurrentTimeInMilliseconds();
 
