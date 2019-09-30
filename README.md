@@ -238,14 +238,14 @@ dependencies {
 6. Delete temp directory
 7. Make the following changes to the pom.xml
     * Add the following repository to to the repositories section of the pom.xml
-        ```xml
+        ```
         <repository>
             <id>localrepository</id>
             <url>file://${project.basedir}/src/test/java/local-repo</url>
         </repository>
         ```
     * Add the following testResource to to the build/testResources section of the pom.xml
-        ```xml
+        ```
         <testResource>
             <directory>src/test/java</directory>
             <excludes>
@@ -254,7 +254,7 @@ dependencies {
         </testResource>
         ```
     * Add the following dependency to to the dependencies section of the pom.xml
-        ```xml
+        ```
         <dependency>
             <groupId>karate.rest.soap.testing</groupId>
             <artifactId>karate-testing</artifactId>
