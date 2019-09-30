@@ -4,6 +4,12 @@ Karate is a BDD-based API Testing framework that allows for the testing of SOAP 
 
 ## Contents
 * [Setting Up Framework](#markdown-header-setting-up-framework)
+    * [Gradle](#markdown-header-gradle)
+        * [Sample Build Gradle](#markdown-header-sample-build-gradle)
+        * [Adding To Existing Build Gradle](#markdown-header-add-to-existing-build-gradle)
+    * [Maven](#markdown-header-maven)
+        * [Sample Pom Xml](#markdown-header-sample-pom-xml)
+        * [Add To Existing Pom Xml](#markdown-header-add-to-existing-pom-xml)
 * [Running Tests](#markdown-header-running-tests)
 * [Reports](#markdown-header-reports)
 * [Framework Utility Classes](#markdown-header-framework-utility-classes)
@@ -26,12 +32,16 @@ Karate is a BDD-based API Testing framework that allows for the testing of SOAP 
 * [Contribution](#markdown-header-contribution)
 
 ## Setting Up Framework
+
+### Gradle
+
+#### Sample Build Gradle
 1. Ensure Gradle is installed
 2. Download the framework locally to extract the framework .jar file from the framework-jar folder
 3. Go into folder where code will live
 4. Run ```gradle init --type java-library :wrapper :init``` to generate a gradle project
-5. Place the ```karate-rest-soap-testing-1.1.0.jar``` file into the src/main/resources directory
-6. Update the build.gradle file to match the following structure
+5. Place the ```karate-rest-soap-testing-1.1.1.jar``` file into the src/main/resources directory
+6. Replace the build.gradle file with the following contents
 ```Java
 plugins {
     // Apply the java-library plugin to add support for Java Library
@@ -73,7 +83,7 @@ test {
 }
 
 dependencies {
-    compile files("src/main/resources/karate-rest-soap-testing-1.1.0.jar")
+    compile files("src/main/resources/karate-rest-soap-testing-1.1.1.jar")
 
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     api "org.apache.commons:commons-math3:3.6.1"
@@ -82,10 +92,182 @@ dependencies {
     implementation "com.google.guava:guava:27.0.1-jre"
 }
 ```
-7. Create a karate-config.js file in the src/test/java folder
+7. Run ```gradle build``` command
+8. Create a karate-config.js file in the src/test/java folder
     * [Karate Config](https://github.com/intuit/karate#karate-configjs)
-8. Read [Recommended File Structure](https://github.com/intuit/karate#naming-conventions)
-9. Start creating tests
+9. Read [Recommended File Structure](https://github.com/intuit/karate#naming-conventions)
+10. Start creating tests
+
+#### Adding To Existing Build Gradle
+1. Download the framework locally to extract the framework .jar file from the framework-jar folder
+2. Place the ```karate-rest-soap-testing-1.1.1.jar``` file into the src/main/resources directory
+3. Add the following line to the dependencies section of the build.gradle file
+    * ```compile files("src/main/resources/karate-rest-soap-testing-1.1.1.jar")```
+4. Add the following lines to the sourceSets/test/resources section of the build.gradle file
+    * ```srcDir file("src/test/java")```
+    * ```exclude "**/*.java"```
+        * See example in sample build.gradle file above
+5. Run ```gradle build``` command
+6. Create a karate-config.js file in the src/test/java folder
+    * [Karate Config](https://github.com/intuit/karate#karate-configjs)
+7. Read [Recommended File Structure](https://github.com/intuit/karate#naming-conventions)
+8. Start creating tests
+
+### Maven
+
+#### Sample Pom Xml
+1. Ensure Maven is installed
+2. Go into folder where code will live
+3. Run ```mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false``` to generate a maven project
+    * Change groupId and artifactId to desired names
+4. Create a directory called local-repo in the src/test/java directory of your new project
+5. Create a directory called temp in the src/test/java directory
+6. Download the framework locally to extract the framework .jar file from the framework-jar folder
+7. Place the ```karate-rest-soap-testing-1.1.1.jar``` file into the src/test/java/temp directory
+8. Run the command ```mvn install:install-file -Dfile=src/test/java/temp/karate-rest-soap-testing-1.1.1.jar -DgroupId=karate.rest.soap.testing -DartifactId=karate-testing  -Dversion=1.1.1 -Dpackaging=jar -DgeneratePom=true -DlocalRepositoryPath=src/test/java/local-repo```
+9. Delete temp directory
+10. Replace the pom.xml file with the following contents
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.mycompany.app</groupId>
+  <artifactId>my-app</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>my-app</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>localrepository</id>
+      <url>file://${project.basedir}/src/test/java/local-repo</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <dependency>
+        <groupId>karate.rest.soap.testing</groupId>
+        <artifactId>karate-testing</artifactId>
+        <version>1.1.1</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <testResources>
+      <testResource>
+        <directory>src/test/java</directory>
+        <excludes>
+            <exclude>**/*.java</exclude>
+        </excludes>
+      </testResource>
+    </testResources>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
+```
+11. Create a karate-config.js file in the src/test/java folder
+    * [Karate Config](https://github.com/intuit/karate#karate-configjs)
+12. Read [Recommended File Structure](https://github.com/intuit/karate#naming-conventions)
+13. Start creating tests
+
+#### Add To Existing Pom Xml
+1. Create a directory called local-repo in the src/test/java directory
+2. Create a directory called temp in the src/test/java directory
+3. Download the framework locally to extract the framework .jar file from the framework-jar folder
+4. Place the ```karate-rest-soap-testing-1.1.1.jar``` file into the src/test/java/temp directory
+5. Run the command ```mvn install:install-file -Dfile=src/test/java/temp/karate-rest-soap-testing-1.1.1.jar -DgroupId=karate.rest.soap.testing -DartifactId=karate-testing  -Dversion=1.1.1 -Dpackaging=jar -DgeneratePom=true -DlocalRepositoryPath=src/test/java/local-repo```
+6. Delete temp directory
+7. Make the following changes to the pom.xml
+    * Add the following repository to to the repositories section of the pom.xml
+        ```xml
+        <repository>
+            <id>localrepository</id>
+            <url>file://${project.basedir}/src/test/java/local-repo</url>
+        </repository>
+        ```
+    * Add the following testResource to to the build/testResources section of the pom.xml
+        ```xml
+        <testResource>
+            <directory>src/test/java</directory>
+            <excludes>
+                <exclude>**/*.java</exclude>
+            </excludes>
+        </testResource>
+        ```
+    * Add the following dependency to to the dependencies section of the pom.xml
+        ```xml
+        <dependency>
+            <groupId>karate.rest.soap.testing</groupId>
+            <artifactId>karate-testing</artifactId>
+            <version>1.1.1</version>
+            <scope>test</scope>
+        </dependency>
+        ```
+    * See example in sample pom.xml file above
+8. Run ```mvn clean install -U``` command
+9. Create a karate-config.js file in the src/test/java folder
+    * [Karate Config](https://github.com/intuit/karate#karate-configjs)
+10. Read [Recommended File Structure](https://github.com/intuit/karate#naming-conventions)
+11. Start creating tests
 
 ## Running Tests
 * If you have not yet done so, read [Recommended File Structure](https://github.com/intuit/karate#naming-conventions)
@@ -99,8 +281,8 @@ public class RunnerTest {
     }
 }
 ```
-* Once that class exists, test can be run using ```gradle test```
-    * Subsets can be run using tags as such ```gradle test -Dkarate.options="--tags @include"```
+* Once that class exists, test can be run using ```gradle test -Dtest=RunnerTest```
+    * Subsets can be run using tags as such ```gradle test -Dtest=RunnerTest -Dkarate.options="--tags @include"```
 * If you want to run test subsets using the JUnit runner in your IDE or have differing Java run configuration for test subsets, Java runner files can be created at the child level
     * Refer back to [Recommended File Structure](https://github.com/intuit/karate#naming-conventions) for more information on this approach
 * It is recommended to delete src/test/reports/karate-output between runs to clean up any cached report data
