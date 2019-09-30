@@ -29,7 +29,7 @@ public class ReportUtility {
     
     public static void generateReport(Results results) {
         ReportBuilder reportBuilder = new ReportBuilder(getJsonFiles(results),
-            createConfiguration(new File(results.getReportDir().replace("karate-output", DateTimeUtility.getFormattedDateTime())), "demo"));
+            createConfiguration(new File(results.getReportDir().replace("karate-output", DateTimeUtility.getReportFormattedDateTime())), "demo"));
         reportBuilder.generateReports();
     }
 
